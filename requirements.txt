@@ -1,0 +1,8 @@
+transformers==4.44.2
+torch==2.4.1
+datasets==2.21.0
+scikit-learn==1.5.2
+wandb==0.18.5
+huggingface-hub==0.25.2
+numpy==1.26.4
+pandas==2.2.3
