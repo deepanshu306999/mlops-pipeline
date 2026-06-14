@@ -1,0 +1,32 @@
+name: Inference
+
+# Task 7.2 — triggered manually from the Actions tab.
+on:
+  workflow_dispatch:
+    inputs:
+      input_text:
+        description: 'Text to classify'
+        required: true
+        default: 'This movie was absolutely fantastic!'
+
+jobs:
+  infer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install inference dependencies
+        run: pip install torch==2.4.1 transformers==4.44.2 huggingface-hub==0.25.2
+
+      - name: Run inference
+        env:
+          # HF_TOKEN comes from GitHub Secrets — never committed (Task 7.3).
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          # Set this repo/org variable to your public fine-tuned model.
+          HF_MODEL_NAME: ${{ vars.HF_MODEL_NAME }}
+          INPUT_TEXT: ${{ github.event.inputs.input_text }}
+        run: python src/inference.py
