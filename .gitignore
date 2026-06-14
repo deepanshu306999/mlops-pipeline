@@ -1,0 +1,32 @@
+# Data (do NOT commit large data files — only id2label.json is committed)
+data/
+*.csv
+*.tsv
+*.parquet
+*.arrow
+
+# Model artifacts
+results/
+checkpoints/
+*.bin
+*.safetensors
+*.pt
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# Secrets / env
+.env
+*.key
+wandb/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
