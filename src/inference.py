@@ -30,6 +30,8 @@ def predict(text, model_name=DEFAULT_MODEL, token=None):
     inputs = tokenizer(
         text, return_tensors="pt", truncation=True, padding=True, max_length=128
     )
+    # DistilBERT's forward() does not accept token_type_ids; drop it if present.
+    inputs.pop("token_type_ids", None)
     with torch.no_grad():
         logits = model(**inputs).logits
     probs = torch.softmax(logits, dim=-1)[0]
